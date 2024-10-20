@@ -1,4 +1,4 @@
-import { error } from "console";
+// import { error } from "console";
 import { NextRequest, NextResponse } from "next/server";
 import schema from "../schema";
 import prisma from "@/prisma/client";
@@ -52,13 +52,20 @@ export async function PUT(
 
 
 
-export function DELETE(
+export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: number } }
+  { params }: { params: { id: string } }
 ) {
   // If dones not exist, return 404
-  if (params.id > 10) {
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(params.id)}
+  })
+
+  if (!user) {
     return NextResponse.json({ error: "User Not Found" }, { status: 404 });
   }
+  await prisma.user.delete({
+    where: { id: user.id}
+  })
   return NextResponse.json({});
 }

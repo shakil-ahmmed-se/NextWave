@@ -5,7 +5,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import schema from "./schema";
 import prisma from "@/prisma/client";
-import { error } from "console";
+// import { error } from "console";
 
 
 // GET request
@@ -14,7 +14,7 @@ export async function GET() {
     return NextResponse.json(users)
 }
 
-export async function POST(request: NextResponse){
+export async function POST(request: NextRequest){
     const body = await request.json();
     // once we read the body of the request
     // check if the request is validate or not if invalid reuturn 400
