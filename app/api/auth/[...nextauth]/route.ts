@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
 
 export const authOption: NextAuthOptions = {
+  // login with email and password
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -36,6 +37,8 @@ export const authOption: NextAuthOptions = {
         return passwordMatch ? user : null;
       },
     }),
+    
+    // Login with Google
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGle_CLIENT_SECRET!,

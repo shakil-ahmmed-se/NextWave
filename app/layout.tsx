@@ -4,6 +4,22 @@ import "./globals.css";
 import NavBar from "./components/NavBar";
 import { Suspense } from "react";
 import AuthProvider from "./auth/Provider";
+import { Poppins, Roboto} from "next/font/google"
+
+const poppins = Poppins({
+  subsets: ['latin-ext'],
+  display: "swap",
+  weight: ["400", "700"],
+  variable: "--font-poppins",
+  
+})
+const roboto = Roboto({
+  subsets: ['latin-ext'],
+  display: "swap",
+  weight: ["400", "700"],
+  variable: "--font-poppins",
+  
+})
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,6 +30,7 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+  
 });
 
 export const metadata: Metadata = {
@@ -29,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme ='winter'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={poppins.className}
       >
         <AuthProvider>
         <NavBar/>
